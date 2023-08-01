@@ -1,0 +1,47 @@
+﻿@page
+@model RazorPages.Pages.Employees.ListModel
+@{
+}
+<h1 class="mb-3 ">List Of Employees</h1>
+@if(Model.Emp!=null && Model.Emp.Any()){
+    <table class="table">
+       <thead>
+           <tr>
+               <th>Fname</th>
+               <th>Minit</th>
+               <th>Lname</th>
+               <th>Ssn</th>
+               <th>Bdate</th>
+               <th>Address</th>
+               <th>Sex</th>
+               <th>Salary</th>
+               <th>Super_ssn</th>
+               <th>Dno</th>
+               <th> </th>
+           </tr>
+       </thead>
+       <tbody>
+            @foreach(var employee in Model.Emp)
+            {
+                <tr>
+                    <td>@employee.Fname</td>
+                    <td>@employee.Minit</td>
+                    <td>@employee.Lname</td>
+                    <td>@employee.Ssn</td>
+                    <td>@employee.Bdate</td>
+                    <td>@employee.Address</td>
+                    <td>@employee.Sex</td>
+                    <td>@employee.Salary</td>
+                    <td>@employee.Super_ssn</td>
+                    <td>@employee.Dno</td>
+                    <td>
+                        <a href="/Employees/Edit/@employee.Ssn" class="btn btn-dark">Edit</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else{
+    <p>No Employee Found</p>
+}
