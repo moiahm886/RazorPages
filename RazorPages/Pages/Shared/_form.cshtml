@@ -1,0 +1,48 @@
+﻿@model RazorPages.Model.ModelViews.SharedEmployeeClasss
+<div class="mb-3">
+    <label for="Fname">First Name:</label>
+    <input type="text" class="form-control col-md-6" asp-for="Fname" id="Fname" name="Fname" required>
+</div>
+
+<div class="mb-3">
+    <label for="Minit">Middle Initial:</label>
+    <input type="text" class="form-control col-md-6" asp-for="Minit" id="Minit" name="Minit" maxlength="1">
+</div>
+
+<div class="mb-3">
+    <label for="Lname">Last Name:</label>
+    <input type="text" class="form-control col-md-6" asp-for="Lname" id="Lname" name="Lname" required>
+</div>
+
+
+
+<div class="mb-3">
+    <label for="Bdate">Birth Date:</label>
+    <input type="date" class="form-control col-md-6" asp-for="Bdate" id="Bdate" name="Bdate" required>
+</div>
+
+<div class="mb-3">
+    <label for="Address">Address:</label>
+    <input type="text" class="form-control col-md-6" asp-for="Address" id="Address" name="Address">
+</div>
+
+<div class="mb-3">
+    <label for="Sex">Sex:</label>
+    <input type="text" class="form-control col-md-6" asp-for="Sex" id="Sex" name="Sex" maxlength="1">
+</div>
+
+<div class="mb-3">
+    <label for="Salary">Salary:</label>
+    <input type="number" class="form-control col-md-6" asp-for="Salary" id="Salary" name="Salary" step="0.01" required>
+</div>
+
+<div class="mb-3">
+    <label for="Super_ssn">Supervisor's Social Security Number:</label>
+    <input type="text" class="form-control col-md-6" asp-for="Super_ssn" id="Super_ssn" name="Super_ssn" pattern="\d{9}" minlength="9" maxlength="9">
+    <small class="form-text text-muted">Please enter a 9-digit Social Security Number for the supervisor (if applicable).</small>
+</div>
+
+<div class="mb-3">
+    <label for="Dno">Department Number:</label>
+    <input type="number" class="form-control col-md-6" asp-for="Dno" id="Dno" name="Dno" required>
+</div>

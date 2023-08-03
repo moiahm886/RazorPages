@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using RazorPages.Data;
 using RazorPages.Model.Domain;
 using RazorPages.Model.ModelViews;
+using System.Dynamic;
 
 namespace RazorPages.Pages.Employees
 {
@@ -10,7 +11,7 @@ namespace RazorPages.Pages.Employees
     {
         private readonly DbContextRazor dbContextRazor;
         [BindProperty]
-        public EditEmployeeViewModel Edit { get; set; }
+        public SharedEmployeeClasss Edit { get; set; }
 
         public EditModel(DbContextRazor dbContextRazor)
         {
@@ -21,7 +22,7 @@ namespace RazorPages.Pages.Employees
             var emp = dbContextRazor.EMPLOYEE.Find(Ssn);
             if (emp != null)
             {
-                Edit = new EditEmployeeViewModel
+                Edit = new SharedEmployeeClasss
                 {
                     Fname = emp.Fname,
                     Minit = emp.Minit,
@@ -43,17 +44,22 @@ namespace RazorPages.Pages.Employees
                 var existingEmployee = dbContextRazor.EMPLOYEE.Find(Edit.Ssn);
                 if (existingEmployee != null)
                 {
-
-                    existingEmployee.Fname = Edit.Fname;
-                    existingEmployee.Minit = Edit.Minit;
-                    existingEmployee.Lname = Edit.Lname;
-                    existingEmployee.Salary = Edit.Salary;
-                    existingEmployee.Sex = Edit.Sex;
-                    existingEmployee.Bdate = Edit.Bdate;
-                    existingEmployee.Address = Edit.Address;
-                    existingEmployee.Super_ssn = Edit.Super_ssn;
-                    existingEmployee.Dno = Edit.Dno;
-
+                    dynamic employeeData = new ExpandoObject();
+                    employeeData.Fname = Edit.Fname;
+                    employeeData.Minit = Edit.Minit;
+                    employeeData.Lname = Edit.Lname;
+                    employeeData.Salary = Edit.Salary;
+                    employeeData.Sex = Edit.Sex;
+                    employeeData.Bdate = Edit.Bdate;
+                    employeeData.Address = Edit.Address;
+                    employeeData.Super_ssn = Edit.Super_ssn;
+                    employeeData.Dno = Edit.Dno;
+                    foreach (var property in ((IDictionary<string, object>)employeeData))
+                    {
+                        var propertyName = property.Key;
+                        var propertyValue = property.Value;
+                        existingEmployee.GetType().GetProperty(propertyName)?.SetValue(existingEmployee, propertyValue);
+                    }
                     dbContextRazor.SaveChanges();
                 }
             }

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace RazorPages.Model.ModelViews
 {
-    public class AddEmployeeModelView
+    public class SharedEmployeeClasss
     {
         public string Fname { get; set; }
         [Column(TypeName = "char(1)")]
